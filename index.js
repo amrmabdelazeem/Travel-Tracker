@@ -24,10 +24,14 @@ app.get("/", async (req, res) => {
   //Write your code here.
   const result = await db.query("SELECT * FROM visited_countries");
   let countries= [];
+  totalCount = result.rowCount;
   result.rows.forEach((country)=>{
     countries.push(country.country_code);
   })
+  console.log(result.rows);
   res.render("index.ejs", { countries, total: totalCount });
+  db.end();
+
 });
 
 app.listen(port, () => {
