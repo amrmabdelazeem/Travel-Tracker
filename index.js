@@ -47,7 +47,8 @@ app.post("/add", async (req, res) => {
     try {
       await db.query("INSERT INTO visited_countries (country_code) VALUES($1)", [countryCode]);
       res.redirect("/");
-    } catch (error) {
+    } catch (err) {
+      console.log(err);
       const countries = await checkVisited();
       res.render("index.ejs", {
         countries,
@@ -55,7 +56,8 @@ app.post("/add", async (req, res) => {
         error: "This country has already been added!",
       });
     }
-  } catch (error) {
+  } catch (err) {
+    console.log(err);
     const countries = await checkVisited();
     res.render("index.ejs", {
       countries,
