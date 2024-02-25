@@ -18,6 +18,13 @@ db.connect();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+let currentUserId = 1;
+
+let users = [
+  { id: 1, name: "Angela", color: "teal" },
+  { id: 2, name: "Jack", color: "powderblue" },
+];
+
 async function checkVisited() {
   const result = await db.query("SELECT country_code FROM visited_countries");
   let countries = [];
@@ -67,6 +74,10 @@ app.post("/add", async (req, res) => {
     });
   }
 });
+
+app.post("/user", async (req, res) => {});
+
+app.post("/new", async (req, res) => {});
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
