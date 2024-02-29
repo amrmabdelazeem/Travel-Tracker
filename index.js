@@ -87,7 +87,17 @@ app.post("/user", async (req, res) => {
   }
 });
 
-app.post("/new", async (req, res) => {});
+app.post("/new", async (req, res) => {
+  const newUser = req.body.name;
+  const color = req.body.color;
+  console.log(newUser, color);
+  try {
+    await db.query('INSERT INTO users (name, color) VALUES($1, $2)',[newUser, color]);
+    res.redirect('/');
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
