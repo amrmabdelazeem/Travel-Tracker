@@ -37,8 +37,14 @@ async function checkVisited() {
 app.get("/", async (req, res) => {
   const countries = await checkVisited();
   console.log(countries.length);
-  res.render("index.ejs", { countries, total: countries.length });
-  // db.end();
+  const result = await db.query("SELECT * FROM users");
+  let users = result.rows;
+  res.render("index.ejs", {
+    countries: countries,
+    total: countries.length,
+    users: users,
+    color: "teal",
+  });  // db.end();
 });
 
 app.post("/add", async (req, res) => {
