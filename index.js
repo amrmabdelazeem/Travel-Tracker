@@ -45,8 +45,8 @@ async function getCurrentUser() {
 
 app.get("/", async (req, res) => {
   const countries = await checkVisited();
-  console.log(countries.length);
   const currentUser = await getCurrentUser();
+  
   res.render("index.ejs", {
     countries: countries,
     total: countries.length,
@@ -105,7 +105,7 @@ app.post("/user", async (req, res) => {
 app.post("/new", async (req, res) => {
   const newUser = req.body.name;
   const color = req.body.color;
-  console.log(newUser, color);
+  console.log("New User added! --> "+newUser);
 
   const result = await db.query("INSERT INTO users (name, color) VALUES ($1, $2) RETURNING*;", [
     newUser,
