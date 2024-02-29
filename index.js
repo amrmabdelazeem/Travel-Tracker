@@ -26,7 +26,7 @@ let users = [
 ];
 
 async function checkVisited() {
-  const result = await db.query("SELECT country_code FROM visited_countries");
+  const result = await db.query("SELECT country_code FROM visited_countries JOIN users ON users.id = user_id WHERE user_id = $1",[currentUserId]);
   let countries = [];
   result.rows.forEach((country) => {
     countries.push(country.country_code);
@@ -34,16 +34,20 @@ async function checkVisited() {
   return countries;
 }
 
+async function getCurrentUserId(){
+  const result = await db.query('SELECT * FROM users');
+  users = result.rows;
+  return users.find((user)=> user.id ==currentUserId);
+}
 app.get("/", async (req, res) => {
   const countries = await checkVisited();
   console.log(countries.length);
-  const result = await db.query("SELECT * FROM users");
-  let users = result.rows;
+  currentUserId = await getCurrentUserId();
   res.render("index.ejs", {
     countries: countries,
     total: countries.length,
     users: users,
-    color: "teal",
+    color: currentUserId.color,
   });  // db.end();
 });
 
@@ -59,7 +63,7 @@ app.post("/add", async (req, res) => {
     const countryCode = data.country_code;
 
     try {
-      await db.query("INSERT INTO visited_countries (country_code) VALUES($1)", [countryCode]);
+      await db.query("INSERT INTO visited_countries (country_code, user_id) VALUES($1, $2)", [countryCode]);
       res.redirect("/");
     } catch (err) {
       console.log(err);
