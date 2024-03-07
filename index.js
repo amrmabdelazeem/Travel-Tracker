@@ -115,18 +115,9 @@ app.post("/new", async (req, res) => {
   const id = result.rows[0].id;
   currentUserId = id;
   res.redirect("/");
-  //Hint: The RETURNING keyword can return the data that was inserted.
-  //https://www.postgresql.org/docs/current/dml-returning.html
 });
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
 
-/*
-1- Assign a route "/add"
-2- save added country name into a variable with req.body
-3- make an SQL query to check if the entered country is in our "countries" table
-4 - then insert it's country code into the visited_countries db.
-
-*/
