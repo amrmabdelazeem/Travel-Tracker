@@ -5,6 +5,8 @@ import pg from "pg";
 const app = express();
 const port = 3000;
 
+//This is not exposing my local DB, it's for development purposes only
+//For safer useage in production or else, change to dotenv.
 const db = new pg.Client({
   user: "postgres",
   host: "localhost",
