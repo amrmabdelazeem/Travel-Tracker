@@ -1,4 +1,4 @@
-### Travel Tracker
+# Travel Tracker
 
 This is a simple family project for tracking visited countries, built using ExpressJS, EJS and PostgreSQL.
 
@@ -6,14 +6,14 @@ This is a simple family project for tracking visited countries, built using Expr
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-# Prerequisites
+## Prerequisites
 
 What things you need to install the software and how to install them:
 
 - Node.js
 - PostgreSQL
 
-# Setting Up Local Environment
+## Setting Up Local Environment
 
 A step by step series of examples that tell you how to get a development environment running
 
@@ -59,7 +59,7 @@ CREATE TABLE visited_countries (
 
 4. Start the server using `nodemon` or `node` in the root directory and visit http://localhost:{port}.
 
-# Routes
+## Routes
 
 - `/`: Home page that displays a map of the world showing which countries have been visited by each user.
 
@@ -67,7 +67,7 @@ CREATE TABLE visited_countries (
 
 - `/user`: Get information about a specific user.
 
-# Built With
+## Built With
 
 - [Node.js](https://nodejs.org/en/)
 - [Express](http://expressjs.com/)
