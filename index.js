@@ -10,11 +10,10 @@ const port = 3000;
 const db = new pg.Client({
   user: "postgres",
   host: "localhost",
-  port: 'add_port',
-  database: 'database_name', //Change this!
-  password: 'password', //Change this!
+  database: "world",
+  password: "789121",
+  port: 5432,
 });
-
 db.connect();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -80,6 +79,8 @@ app.post("/add", async (req, res) => {
       const countries = await checkVisited();
       res.render("index.ejs", {
         countries,
+        users,
+        color: currentUser.color,
         total: countries.length,
         error: "This country has already been added!",
       });
@@ -89,6 +90,8 @@ app.post("/add", async (req, res) => {
     const countries = await checkVisited();
     res.render("index.ejs", {
       countries,
+      users,
+      color: currentUser.color,
       total: countries.length,
       error: "Country name doesn't exist! try again!",
     });
