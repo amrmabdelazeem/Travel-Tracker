@@ -54,6 +54,7 @@ CREATE TABLE visited_countries (
   id SERIAL PRIMARY KEY,
   user_id INTEGER NOT NULL REFERENCES users(id),
   country_code CHAR(3) NOT NULL REFERENCES countries(country_code)
+  UNIQUE (user_id, country_code)
 );
 ```
 
